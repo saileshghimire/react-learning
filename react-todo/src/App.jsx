@@ -82,17 +82,19 @@ function App(){
   const [todos, setTodos] = useState([]);
 
   useEffect(function(){
-    fetch("https://sum-server.100xdevs.com/todos")
-    .then(async function(res){
-      const json = await res.json();
-      setTodos(json.todos);
-    })
+    setInterval(()=>{
+        fetch("https://sum-server.100xdevs.com/todos")
+        .then(async function(res){
+          const json = await res.json();
+          setTodos(json.todos);
+      })
+    },10000)
   },[]);
   return (
     <>
     {todos.length}
-    {todos.map(function(todo){
-      <Todos key={todo.id} title={todo.title} description={todo.description} />})}
+    {todos.map(todo =>
+      <Todos key={todo.id} title={todo.title} description={todo.description} />)}
     </>
   )
 }
