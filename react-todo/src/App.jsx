@@ -80,6 +80,7 @@ import { useEffect } from 'react'
 //  for multiple rendering we have to set timer
 function App(){
   const [todos, setTodos] = useState([]);
+
   useEffect(function(){
     fetch("https://sum-server.100xdevs.com/todos")
     .then(async function(res){
@@ -88,9 +89,11 @@ function App(){
     })
   },[]);
   return (
-    <Todos key={todos.id} todos={todos}>
-    
-  </Todos>
+    <>
+    {todos.length}
+    {todos.map(function(todo){
+      <Todos key={todo.id} title={todo.title} description={todo.description} />})}
+    </>
   )
 }
 
