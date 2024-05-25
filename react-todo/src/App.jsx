@@ -2,8 +2,9 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Todo} from './Todos'
+import { Todos} from './Todos'
 import { CardWrapper, TextComponent } from './Wrapper'
+import { useEffect } from 'react'
 
 // let count=5;
 
@@ -53,25 +54,44 @@ import { CardWrapper, TextComponent } from './Wrapper'
 
 //  wrapper concept
 
-function App(){
-  return(
-    <div>
-    <CardWrapper>
-      <div>hi</div> 
-      <div>hello</div>
-    </CardWrapper>
-    <br />
-    <CardWrapper>
-      hi
-      <div>hello</div>
-      <CardWrapper>
-      <TextComponent text="sailesh Ghimire"></TextComponent>
-    </CardWrapper>
-    </CardWrapper>
+// function App(){
+//   return(
+//     <div>
+//     <CardWrapper>
+//       <div>hi</div> 
+//       <div>hello</div>
+//     </CardWrapper>
+//     <br />
+//     <CardWrapper>
+//       hi
+//       <div>hello</div>
+//       <CardWrapper>
+//       <TextComponent text="sailesh Ghimire"></TextComponent>
+//     </CardWrapper>
+//     </CardWrapper>
     
-    </div>
-  )
+//     </div>
+//   )
    
+// }
+
+
+// useEffect mount the code. mount means rendering for only once
+//  for multiple rendering we have to set timer
+function App(){
+  const [todos, setTodos] = useState([]);
+  useEffect(function(){
+    fetch("https://sum-server.100xdevs.com/todos")
+    .then(async function(res){
+      const json = await res.json();
+      setTodos(json.todos);
+    })
+  },[]);
+  return (
+    <Todos key={todos.id} todos={todos}>
+    
+  </Todos>
+  )
 }
 
 
