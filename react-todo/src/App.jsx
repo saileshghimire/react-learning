@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Todo} from './Todos'
 
+let count=5;
+
 function App() {
   const [todos, setTodos] = useState([{
     id:1,
@@ -16,19 +18,20 @@ function App() {
   description:"Do coding 8 hours a day"
 },
 {
-  id:4,
+  id:3,
   title:"Code-Code",
   description:"Do coding 8 hours a day"
 },{
-  id:5,
+  id:4,
   title:"Coding",
   description:"Do coding 8 hours a day"
 }
-])
+]);
+
 
 function addTodo(){
   setTodos([...todos,{
-    id:6,
+    id:count++,
     title:Math.random(),
     description: Math.random()
   }])
@@ -36,10 +39,10 @@ function addTodo(){
 
   return (
     <>
-    <button onClick={addTodo}></button>
+    <button onClick={addTodo}>Add todo</button>
       {todos.map(function(todo){
         return(
-        <Todo title={todo.title} description={todo.description} />
+        <Todo key={todo.id} title={todo.title} description={todo.description} />
         )
       })}
     </>
