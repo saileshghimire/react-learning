@@ -54,8 +54,24 @@ import { CardWrapper, TextComponent } from './Wrapper'
 //  wrapper concept
 
 function App(){
-  <CardWrapper innerComponent={TextComponent} />
-  
+  return(
+    <div>
+    <CardWrapper>
+      <div>hi</div> 
+      <div>hello</div>
+    </CardWrapper>
+    <br />
+    <CardWrapper>
+      hi
+      <div>hello</div>
+      <CardWrapper>
+      <TextComponent text="sailesh Ghimire"></TextComponent>
+    </CardWrapper>
+    </CardWrapper>
+    
+    </div>
+  )
+   
 }
 
 
