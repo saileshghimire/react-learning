@@ -26,9 +26,22 @@ function App() {
 }
 ])
 
+function addTodo(){
+  setTodos([...todos,{
+    id:6,
+    title:Math.random(),
+    description: Math.random()
+  }])
+}
+
   return (
     <>
-      <Todo></Todo>
+    <button onClick={addTodo}></button>
+      {todos.map(function(todo){
+        return(
+        <Todo title={todo.title} description={todo.description} />
+        )
+      })}
     </>
   )
 }
