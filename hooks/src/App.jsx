@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -104,6 +104,34 @@ function Todo({id}){
 //   )
 // }
 
+function App(){
+  const [count, setCount] = useState(0);
 
+  const logsomething =  useCallback(() => {
+    console.log("Button clicked");
+  },[])
+
+  return(
+    <>
+    <ButtonComponent inputFunction={logsomething} />
+    <br />
+    <br />
+    <button onClick={() =>{
+      setCount(count + 1);
+    }}>Click Me {count}</button>
+    </>
+  )
+}
+const ButtonComponent = memo(({inputFunction}) => {
+  console.log("child rendered");
+
+  return(
+  <>
+  <button onClick={inputFunction}> 
+  Button Clicked
+  </button>
+  </>
+  )
+})
 
 export default App
