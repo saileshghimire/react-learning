@@ -25,33 +25,54 @@ import axios from "axios";
 
 // }
 
+
+
 function Todo({id}){
-  const {todo,setTodo} = useState({});
+  const [todo,setTodo] = useState({});
 
   useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/todos?id=" + id)
+    axios.get("https://sum-server.100xdevs.com/todo?id=" + id)
     .then(response => {
       setTodo(response.data.todo);
     })
-  },[])
+  },[id])
 
   return(
     <>
-    <h2>
+    <h1>
       {todo.title}
-    </h2>
-    <h5>
+    </h1>
+    <h4>
       {todo.description}
-    </h5>
+    </h4>
     </>
   )
 }
 
 function App(){
+  const [todoID, setTodoId] = useState(1);
+
+function clickHander(id){
+  setTodoId(id);
+}
   return(
     <>
-    <Todo id={3}></Todo>
-    </>
+    <button onClick={function(){
+      setTodoId(1)
+    }}>1</button>
+    <button onClick={function(){
+      setTodoId(2)
+    }}>2</button>
+    <button onClick={function(){
+      setTodoId(3)
+    }}>3</button>
+    <button onClick={() => clickHander(4)}>4</button>
+    <Todo id ={todoID} />
+   </>
+
+  //  <>
+  //   <Todo id ={3}></Todo>
+  //   </>
   )
 }
 
