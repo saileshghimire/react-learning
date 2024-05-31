@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import axios from 'axios'; 
 
 // using hard code value
 
@@ -37,12 +38,13 @@ import { atom, selector } from "recoil";
 
 export const notifications = atom({
     key:"notificationAtom",
-    default :{
-        network:4,
-        jobs :0,
-        messaging: 3,
-        notifications: 3
-    }
+    default :selector({
+        key:"notificationsAtomSelector",
+        get:async () =>{
+            const res = await axios.get("https://sum-server.100xdevs.com/notifications")
+            return res.data;
+        }
+    })
 });
 
 export const totalNotificationSelector = selector({

@@ -41,15 +41,7 @@ function MainApp(){
   const [notificationCount , setNotificationCount] = useRecoilState(notifications);
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
-  useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/notifications")
-    .then(res => {
-      setNotificationCount(res.data);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
-  },[])
+
 
   return(
     <>
