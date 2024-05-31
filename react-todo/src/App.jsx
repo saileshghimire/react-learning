@@ -1,10 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
-import { Todos} from './Todos'
-import { CardWrapper, TextComponent } from './Wrapper'
-import { useEffect } from 'react'
+// import { Todos} from './Todos'
+// import { CardWrapper, TextComponent } from './Wrapper'
+// import { useEffect } from 'react'
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
+import { todosAtomFamily } from './atom';
+
 
 // let count=5;
 
@@ -78,26 +81,37 @@ import { useEffect } from 'react'
 
 // useEffect mount the code. mount means rendering for only once
 //  for multiple rendering we have to set timer
-function App(){
-  const [todos, setTodos] = useState([]);
 
-  useEffect(function(){
-    setInterval(()=>{
-        fetch("https://sum-server.100xdevs.com/todos")
-        .then(async function(res){
-          const json = await res.json();
-          setTodos(json.todos);
-      })
-    },10000)
-  },[]);
-  return (
+
+
+function App() {
+  return(
     <>
-    {todos.length}
-    {todos.map(todo =>
-      <Todos key={todo.id} title={todo.title} description={todo.description} />)}
+    <RecoilRoot>
+    <Todo id={1}/>
+    <Todo id={2} />
+  </RecoilRoot>
     </>
   )
 }
+
+function Todo({id}) {
+   const currentTodo = useRecoilValue(todosAtomFamily(id));
+   if (!currentTodo) {
+    return <div>Todo not found</div>;
+  }
+  return (
+    <>
+    <div>{currentTodo.title}</div>
+    <div>{currentTodo.description}</div>
+    <br />
+  </>
+  )
+}
+
+
+
+
 
 
 
