@@ -10,5 +10,21 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://db_owner:vFdG0cRtW9Qb@ep-tiny-field-a1xc1nr2.ap-southeast-1.aws.neon.tech/db?sslmode=require"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  firstName String? 
+  lastName String?
+  password String
+}
+
+model Todos {
+  id Int @id @default(autoincrement())
+  title String?
+  description String?
+  done Boolean @default(false)
+  userId Int
 }
